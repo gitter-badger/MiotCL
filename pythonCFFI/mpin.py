@@ -89,13 +89,11 @@ extern int MPIN_PRECOMPUTE(octet *,octet *,octet *,octet *);
 extern int MPIN_SERVER_KEY(octet *,octet *,octet *,octet *,octet *,octet *);
 extern int MPIN_CLIENT_KEY(octet *,octet *,int ,octet *,octet *,octet *,octet *);
 extern int MPIN_GET_G1_MULTIPLE(csprng *,int,octet *,octet *,octet *);
-
 extern int MPIN_GET_CLIENT_SECRET(octet *,octet *,octet *); 
 extern int MPIN_GET_CLIENT_PERMIT(int,octet *,octet *,octet *); 
 extern int MPIN_GET_SERVER_SECRET(octet *,octet *); 
 extern int MPIN_TEST_PAIRING(octet *,octet *);
 extern void hex2bytes(char *hex, char *bin);
-extern void version(char* info);
 extern void generateRandom(csprng*, octet*);
 extern int generateOTP(csprng*);
 extern void AES_GCM_ENCRYPT(octet *K,octet *IV,octet *H,octet *P,octet *C,octet *T);
@@ -148,10 +146,6 @@ if __name__ == "__main__":
     else:
         date = 0
 
-    build_version = ffi.new("char []", 256)
-    libmpin.version(build_version)
-    print ffi.string(build_version)
-    
     # Seed
     seedHex = "3ade3d4a5c698e8910bf92f25d97ceeb7c25ed838901a5cb5db2cf25434c1fe76c7f79b7af2e5e1e4988e4294dbd9bd9fa3960197fb7aec373609fb890d74b16a4b14b2ae7e23b75f15d36c21791272372863c4f8af39980283ae69a79cf4e48e908f9e0"
     seed = seedHex.decode("hex")

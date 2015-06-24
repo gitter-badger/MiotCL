@@ -947,15 +947,6 @@ void AES_GCM_DECRYPT(octet *K,octet *IV,octet *H,octet *C,octet *P,octet *T)
   T->len=16;
 }
 
-/*! \brief Print version number and information about the build
- *
- *  Print version number and information about the build
- * 
- */
-void version(char* info)
-{
-  sprintf(info,"Version: %d.%d.%d OS: %s FIELD CHOICE: %s CURVE TYPE: %s WORD_LENGTH: %d", MiotCL_VERSION_MAJOR, MiotCL_VERSION_MINOR, MiotCL_VERSION_PATCH, OS, FIELD_CHOICE, CURVE_TYPE, CHUNK);
-}
 
 /*
 int MPIN_TEST_PAIRING(octet *CID,octet *R)

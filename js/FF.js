@@ -851,7 +851,8 @@ FF.cswap=function(a,b,d)
 {
 	for (var i=0;i<a.length;i++)
 	{
-		BIG.cswap(a.v[i],b.v[i],d);
+	//	BIG.cswap(a.v[i],b.v[i],d);
+		a.v[i].cswap(b.v[i],d);
 	}
 };
 

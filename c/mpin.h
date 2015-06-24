@@ -339,12 +339,5 @@ DLL_EXPORT void AES_GCM_ENCRYPT(octet *K,octet *IV,octet *H,octet *P,octet *C,oc
  */
 DLL_EXPORT void AES_GCM_DECRYPT(octet *K,octet *IV,octet *H,octet *C,octet *P,octet *T);
 
-/*! \brief Print version number and information about the build
- *
- *  Print version number and information about the build
- * 
- */
-DLL_EXPORT void version(char* info);
-
 #endif
 

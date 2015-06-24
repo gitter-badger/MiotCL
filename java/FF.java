@@ -20,7 +20,7 @@ You can be released from the requirements of the license by purchasing
 a commercial license.
 */
 
-/* Large Finite Field arithmetic */
+/* Java Large Finite Field arithmetic */
 /* MiotCL mod p functions */
 
 public final class FF {

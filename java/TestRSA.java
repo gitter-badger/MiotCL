@@ -24,16 +24,6 @@ a commercial license.
 
 public class TestRSA
 {
-	public static void printBinary(byte[] array)
-	{
-		int i;
-		for (i=0;i<array.length;i++)
-		{
-			System.out.printf("%02x", array[i]);
-		}
-		System.out.println();
-	}    
-
 	public static void main(String[] args) 
 	{
 		int i;
@@ -65,7 +55,7 @@ public class TestRSA
 		byte[] E=RSA.OAEP_ENCODE(M,rng,null); /* OAEP encode message m to e  */
 
 		RSA.ENCRYPT(pub,E,C);     /* encrypt encoded message */
-		System.out.print("Ciphertext= 0x"); printBinary(C);
+		System.out.print("Ciphertext= 0x"); RSA.printBinary(C);
 
 		System.out.print("Decrypting test string\n");
 		RSA.DECRYPT(priv,C,ML); 

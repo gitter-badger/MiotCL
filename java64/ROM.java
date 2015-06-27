@@ -216,7 +216,7 @@ public static final long MConst=0x4E205BF9789E85L;
 //	public static final int CURVE_A =-240222;
 //	public static final long[] CURVE_B = {0x0L,0x0L,0x0L,0x0L,0x0L}; // not used
 //	public static final long[] CURVE_Order={0x49D1ED0436EB75L,0xA785EDA6832EACL,0xFFFFFFFFFFDCF1L,0xFFFFFFFFFFFFFFL,0x1FFFFFFFL};
-//	public static final long[] CURVE_Gx ={0x7L,0x0L,0x0L,0x0L,0x0L};
+//	public static final long[] CURVE_Gx ={0x4L,0x0L,0x0L,0x0L,0x0L};
 //	public static final long[] CURVE_Gy ={0x0L,0x0L,0x0L,0x0L,0x0L}; // not used
 
 // MS256, Weierstrass Curve

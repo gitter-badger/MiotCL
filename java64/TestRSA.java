@@ -23,16 +23,7 @@ a commercial license.
 /* test driver and function exerciser for RSA API Functions */
 
 public class TestRSA
-{
-	public static void printBinary(byte[] array)
-	{
-		int i;
-		for (i=0;i<array.length;i++)
-		{
-			System.out.printf("%02x", array[i]);
-		}
-		System.out.println();
-	}    
+{ 
 
 	public static void main(String[] args) 
 	{
@@ -65,7 +56,7 @@ public class TestRSA
 
 		RSA.ENCRYPT(pub,E,C);     /* encrypt encoded message */
 
-		System.out.print("Ciphertext= 0x"); printBinary(C);
+		System.out.print("Ciphertext= 0x"); RSA.printBinary(C);
 
 		System.out.print("Decrypting test string\n");
 		RSA.DECRYPT(priv,C,ML); 

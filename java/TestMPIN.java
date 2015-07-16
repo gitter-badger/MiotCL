@@ -48,8 +48,8 @@ public class TestMPIN
 		for (int i=0;i<100;i++) raw[i]=(byte)(i+1);
 		rng.seed(100,raw);
 
-		int EGS=32;
-		int EFS=32;
+		int EGS=MPIN.EGS;
+		int EFS=MPIN.EFS;
 		int G1S=2*EFS+1; /* Group 1 Size */
 		int G2S=4*EFS; /* Group 2 Size */
 		int EAS=16;

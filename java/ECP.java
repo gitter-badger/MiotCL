@@ -45,7 +45,7 @@ public final class ECP {
 		else return INF;
 	}
 /* Conditional swap of P and Q dependant on d */
-	public void cswap(ECP Q,int d)
+	private void cswap(ECP Q,int d)
 	{
 		x.cswap(Q.x,d);
 		if (ROM.CURVETYPE!=ROM.MONTGOMERY) y.cswap(Q.y,d);
@@ -62,7 +62,7 @@ public final class ECP {
 	}
 
 /* Conditional move of Q to P dependant on d */
-	public void cmove(ECP Q,int d)
+	private void cmove(ECP Q,int d)
 	{
 		x.cmove(Q.x,d);
 		if (ROM.CURVETYPE!=ROM.MONTGOMERY) y.cmove(Q.y,d);
@@ -77,7 +77,7 @@ public final class ECP {
 	}
 
 /* return 1 if b==c, no branching */
-	public static int teq(int b,int c)
+	private static int teq(int b,int c)
 	{
 		int x=b^c;
 		x-=1;  // if x=0, x now -1
@@ -85,7 +85,7 @@ public final class ECP {
 	}
 
 /* Constant time select from pre-computed table */
-	public void select(ECP W[],int b)
+	private void select(ECP W[],int b)
 	{
 		ECP MP=new ECP(); 
 		int m=b>>31;
@@ -166,8 +166,10 @@ public final class ECP {
 	public void inf() {
 		INF=true;
 		x.zero();
-		y=new FP(1);
-		z=new FP(1);
+		y.one();
+		z.one();
+	//	y=new FP(1);
+	//	z=new FP(1);
 	}
 
 /* Calculate RHS of curve equation */
@@ -240,12 +242,13 @@ public final class ECP {
 	public ECP(BIG ix,int s) {
 		x=new FP(ix);
 		FP rhs=RHS(x);
+		y=new FP(0);
 		z=new FP(1);
 		if (rhs.jacobi()==1)
 		{
 			FP ny=rhs.sqrt();
 			if (ny.redc().parity()!=s) ny.neg();
-			y=ny;
+			y.copy(ny);
 			INF=false;
 		}
 		else inf();
@@ -255,10 +258,11 @@ public final class ECP {
 	public ECP(BIG ix) {
 		x=new FP(ix);
 		FP rhs=RHS(x);
+		y=new FP(0);
 		z=new FP(1);
 		if (rhs.jacobi()==1)
 		{
-			if (ROM.CURVETYPE!=ROM.MONTGOMERY) y=rhs.sqrt();
+			if (ROM.CURVETYPE!=ROM.MONTGOMERY) y.copy(rhs.sqrt());
 			INF=false;
 		}
 		else INF=true;
@@ -277,19 +281,17 @@ public final class ECP {
 			x.mul(z2); x.reduce();
 			y.mul(z2); 
 			y.mul(z);  y.reduce();
-			z=one;
 		}
 		if (ROM.CURVETYPE==ROM.EDWARDS)
 		{
 			x.mul(z); x.reduce();
 			y.mul(z); y.reduce();
-			z=one;
 		}
 		if (ROM.CURVETYPE==ROM.MONTGOMERY)
 		{
 			x.mul(z); x.reduce();
-			z=one;
 		}
+		z.copy(one);
 	}
 /* extract x as a BIG */
 	public BIG getX()

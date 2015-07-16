@@ -250,7 +250,7 @@ public final class FF {
 	}
 
 	/* normalise - but hold any overflow in top part unless n<0 */
-	public void rnorm(int vp,int n)
+	private void rnorm(int vp,int n)
 	{
 		boolean trunc=false;
 		int i,carry;
@@ -334,7 +334,7 @@ public final class FF {
 	}
 
 /* in-place swapping using xor - side channel resistant - lengths must be the same */
-	public static void cswap(FF a,FF b,int d)
+	private static void cswap(FF a,FF b,int d)
 	{
 		for (int i=0;i<a.length;i++)
 		{
@@ -344,7 +344,7 @@ public final class FF {
 	}
 
 /* z=x*y, t is workspace */
-	public void karmul(int vp,FF x,int xp,FF y,int yp,FF t,int tp,int n)
+	private void karmul(int vp,FF x,int xp,FF y,int yp,FF t,int tp,int n)
 	{
 		int nd2;
 		if (n==1)
@@ -368,7 +368,7 @@ public final class FF {
 		rnorm(vp,2*n);
 	}
 
-	public void karsqr(int vp,FF x,int xp,FF t,int tp,int n)
+	private void karsqr(int vp,FF x,int xp,FF t,int tp,int n)
 	{
 		int nd2;
 		if (n==1)
@@ -389,7 +389,7 @@ public final class FF {
 	}
 
 
-	public void karmul_lower(int vp,FF x,int xp,FF y,int yp,FF t,int tp,int n)
+	private void karmul_lower(int vp,FF x,int xp,FF y,int yp,FF t,int tp,int n)
 	{ /* Calculates Least Significant bottom half of x*y */
 		int nd2;
 		if (n==1)
@@ -407,7 +407,7 @@ public final class FF {
 		rnorm(vp+nd2,-nd2);  /* truncate it */
 	}
 
-	public void karmul_upper(FF x,FF y,FF t,int n)
+	private void karmul_upper(FF x,FF y,FF t,int n)
 	{ /* Calculates Most Significant upper half of x*y, given lower part */
 		int nd2;
  
@@ -630,14 +630,14 @@ public final class FF {
 		mod(m);
 	}
 
-	public void mod2m(int m)
+	private void mod2m(int m)
 	{
 		for (int i=m;i<length;i++)
 			v[i].zero();
 	}
 
 	/* U=1/a mod 2^m - Arazi & Qi */
-	public FF invmod2m()
+	private FF invmod2m()
 	{
 		int i,n=length;
 
@@ -860,7 +860,7 @@ public final class FF {
 		redc(p,ND);
 	}
 
-	public static int igcd(int x,int y)
+	private static int igcd(int x,int y)
 	{ /* integer GCD, returns GCD of x and y */
 		int r;
 		if (y==0) return x;

@@ -50,14 +50,14 @@ public class GCM {
 	public static final int GCM_ENCRYPTING=0;
 	public static final int GCM_DECRYPTING=1;
 
-	int[][] table=new int[128][4]; /* 2k bytes */
-	byte[] stateX=new byte[16];
-	byte[]Y_0=new byte[16];
-	int counter;
-	int[] lenA=new int[2];
-	int[] lenC=new int[2];
-	int status;
-	AES a=new AES();
+	private int[][] table=new int[128][4]; /* 2k bytes */
+	private byte[] stateX=new byte[16];
+	private byte[]Y_0=new byte[16];
+	private int counter;
+	private int[] lenA=new int[2];
+	private int[] lenC=new int[2];
+	private int status;
+	private AES a=new AES();
 
 	private static int pack(byte[] b)
 	{ /* pack bytes into a 32-bit Word */

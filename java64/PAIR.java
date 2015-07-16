@@ -481,12 +481,10 @@ public final class PAIR {
 		if (!ROM.GT_STRONG)
 		{
 			if (!w.equals(r)) return false;
-			{
-				BIG x=new BIG(ROM.CURVE_Bnx);
-				r.copy(m); w=r.pow(x); w=w.pow(x);
-				r.copy(w); r.sqr(); r.mul(w); r.sqr();
-				w.copy(m); w.frob(f);
-			}
+			BIG x=new BIG(ROM.CURVE_Bnx);
+			r.copy(m); w=r.pow(x); w=w.pow(x);
+			r.copy(w); r.sqr(); r.mul(w); r.sqr();
+			w.copy(m); w.frob(f);
 		}
 		return w.equals(r);
 	}

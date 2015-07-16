@@ -29,6 +29,7 @@ public class MPIN
 	public static final int EFS=ROM.MODBYTES;
 	public static final int EGS=ROM.MODBYTES;
 	public static final int PAS=16;
+	public static final int BAD_PARAMS=-11;
 	public static final int INVALID_POINT=-14;
 	public static final int WRONG_ORDER=-18;
 	public static final int BAD_PIN=-19;
@@ -168,13 +169,13 @@ public class MPIN
 		BIG p=new BIG(ROM.Modulus);
 		u=BIG.randomnum(p,rng);
 
-		su=rng.getByte(); if (su<0) su=-su; su%=2;
+		su=rng.getByte(); /*if (su<0) su=-su;*/ su%=2;
 		
 		ECP W=map(u,su);
 		P.sub(W);
 		sv=P.getS();
 		rn=unmap(v,P);
-		m=rng.getByte(); if (m<0) m=-m; m%=rn;
+		m=rng.getByte(); /*if (m<0) m=-m;*/ m%=rn;
 		v.inc(m+1);
 		E[0]=(byte)(su+2*sv);
 		u.toBytes(T);
@@ -442,13 +443,20 @@ public class MPIN
 		if (date!=0)
 			R=ECP.fromBytes(xCID);
 		else 
+		{
+			if (xID==null) return BAD_PARAMS;
 			R=ECP.fromBytes(xID);
+		}
 		if (R.is_infinity()) return INVALID_POINT;
 
 		BIG y=BIG.fromBytes(Y);
 		ECP P;
 		if (date!=0) P=ECP.fromBytes(HTID);
-		else P=ECP.fromBytes(HID);
+		else 
+		{
+			if (HID==null) return BAD_PARAMS;
+			P=ECP.fromBytes(HID);
+		}
 	
 		if (P.is_infinity()) return INVALID_POINT;
 

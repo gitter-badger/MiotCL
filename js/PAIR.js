@@ -500,12 +500,10 @@ PAIR.GTmember= function(m)
 	if (!ROM.GT_STRONG)
 	{
 		if (!w.equals(r)) return false;
-		{
-			var x=new BIG(0); x.rcopy(ROM.CURVE_Bnx);
-			r.copy(m); w=r.pow(x); w=w.pow(x);
-			r.copy(w); r.sqr(); r.mul(w); r.sqr();
-			w.copy(m); w.frob(f);
-		}
+		var x=new BIG(0); x.rcopy(ROM.CURVE_Bnx);
+		r.copy(m); w=r.pow(x); w=w.pow(x);
+		r.copy(w); r.sqr(); r.mul(w); r.sqr();
+		w.copy(m); w.frob(f);
 	}
 	return w.equals(r);
 };

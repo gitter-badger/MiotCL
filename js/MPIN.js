@@ -23,7 +23,7 @@ a commercial license.
 /* MPIN API Functions */
 
 var MPIN = {
-
+	BAD_PARAMS:-11,
 	INVALID_POINT:-14,
 	WRONG_ORDER:-18,
 	BAD_PIN:-19,
@@ -486,14 +486,21 @@ var MPIN = {
 		if (date!==0)
 			R=ECP.fromBytes(xCID);
 		else 
+		{
+			if (xID==null) return this.BAD_PARAMS;
 			R=ECP.fromBytes(xID);
+		}
 		if (R.is_infinity()) return this.INVALID_POINT;
 
 		var y=BIG.fromBytes(Y);
 		var P;
 
 		if (date!=0) P=ECP.fromBytes(HTID);
-		else P=ECP.fromBytes(HID);
+		else
+		{
+			if (HID==null) return this.BAD_PARAMS;
+			P=ECP.fromBytes(HID);
+		}
 		if (P.is_infinity()) return this.INVALID_POINT;
 
 		P=PAIR.G1mul(P,y);

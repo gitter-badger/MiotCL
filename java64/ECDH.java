@@ -387,9 +387,9 @@ public final class ECDH {
 			c.mod(r);
 			if (c.iszilch()) continue;
 			u.invmodp(r);
-			d=BIG.modmul(s,c,r);
+			d.copy(BIG.modmul(s,c,r));
 			d.add(f);
-			d=BIG.modmul(u,d,r);
+			d.copy(BIG.modmul(u,d,r));
 		} while (d.iszilch());
        
 		c.toBytes(T);
@@ -402,16 +402,14 @@ public final class ECDH {
 /* IEEE1363 ECDSA Signature Verification. Signature C and D on F is verified using public key W */
 	public static int ECPVP_DSA(byte[] W,byte[] F, byte[] C,byte[] D)
 	{
-		byte[] B=new byte[32];
 		BIG r,gx,gy,f,c,d,h2;
 		int res=0;
 		ECP G,WP,P;
 		int valid; 
-		byte[] T=new byte[EFS];
 
 		HASH H=new HASH();
 		H.process_array(F);
-		B=H.hash();
+		byte[] B=H.hash();
 
 		gx=new BIG(ROM.CURVE_Gx);
 		gy=new BIG(ROM.CURVE_Gy);
@@ -429,7 +427,7 @@ public final class ECDH {
 		if (res==0)
 		{
 			d.invmodp(r);
-			f=BIG.modmul(f,d,r);
+			f.copy(BIG.modmul(f,d,r));
 			h2=BIG.modmul(c,d,r);
 
 			WP=ECP.fromBytes(W);

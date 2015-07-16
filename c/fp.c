@@ -65,8 +65,11 @@ void FP_mod(BIG r,DBIG d)
 		v=BIG_pmul(t,t,MConst);
 		tw=t[NLEN-1]; 
 		t[NLEN-1]&=TMASK;
+#if CHUNK == 16
+		t[1]+=muladd(MConst,((tw>>TBITS)+(v<<(BASEBITS-TBITS))),0,&t[0]);
+#else
 		t[0]+=MConst*((tw>>TBITS)+(v<<(BASEBITS-TBITS)));
-
+#endif
 	}
 	BIG_add(r,t,b);
 	BIG_norm(r);

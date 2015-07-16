@@ -42,12 +42,12 @@ public class AES {
 	public static final int OFB8=21;
 	public static final int OFB16=29;
 
-	public static final byte[] InCo={(byte)0xB,(byte)0xD,(byte)0x9,(byte)0xE};  /* Inverse Coefficients */
+	private static final byte[] InCo={(byte)0xB,(byte)0xD,(byte)0x9,(byte)0xE};  /* Inverse Coefficients */
 
 	public static final int KS=16; /* Key Size in bytes */
 	public static final int BS=16; /* Block Size */
 
-	public static final byte[] ptab=
+	private static final byte[] ptab=
 	{(byte)1,(byte)3,(byte)5,(byte)15,(byte)17,(byte)51,(byte)85,(byte)255,(byte)26,(byte)46,(byte)114,(byte)150,(byte)161,(byte)248,(byte)19,(byte)53,
 	(byte)95,(byte)225,(byte)56,(byte)72,(byte)216,(byte)115,(byte)149,(byte)164,(byte)247,(byte)2,(byte)6,(byte)10,(byte)30,(byte)34,(byte)102,(byte)170,
 	(byte)229,(byte)52,(byte)92,(byte)228,(byte)55,(byte)89,(byte)235,(byte)38,(byte)106,(byte)190,(byte)217,(byte)112,(byte)144,(byte)171,(byte)230,(byte)49,
@@ -65,7 +65,7 @@ public class AES {
 	(byte)18,(byte)54,(byte)90,(byte)238,(byte)41,(byte)123,(byte)141,(byte)140,(byte)143,(byte)138,(byte)133,(byte)148,(byte)167,(byte)242,(byte)13,(byte)23,
 	(byte)57,(byte)75,(byte)221,(byte)124,(byte)132,(byte)151,(byte)162,(byte)253,(byte)28,(byte)36,(byte)108,(byte)180,(byte)199,(byte)82,(byte)246,(byte)1};
 
-	public static final byte[] ltab=
+	private static final byte[] ltab=
 	{(byte)0,(byte)255,(byte)25,(byte)1,(byte)50,(byte)2,(byte)26,(byte)198,(byte)75,(byte)199,(byte)27,(byte)104,(byte)51,(byte)238,(byte)223,(byte)3,
 	(byte)100,(byte)4,(byte)224,(byte)14,(byte)52,(byte)141,(byte)129,(byte)239,(byte)76,(byte)113,(byte)8,(byte)200,(byte)248,(byte)105,(byte)28,(byte)193,
 	(byte)125,(byte)194,(byte)29,(byte)181,(byte)249,(byte)185,(byte)39,(byte)106,(byte)77,(byte)228,(byte)166,(byte)114,(byte)154,(byte)201,(byte)9,(byte)120,
@@ -83,7 +83,7 @@ public class AES {
 	(byte)68,(byte)17,(byte)146,(byte)217,(byte)35,(byte)32,(byte)46,(byte)137,(byte)180,(byte)124,(byte)184,(byte)38,(byte)119,(byte)153,(byte)227,(byte)165,
 	(byte)103,(byte)74,(byte)237,(byte)222,(byte)197,(byte)49,(byte)254,(byte)24,(byte)13,(byte)99,(byte)140,(byte)128,(byte)192,(byte)247,(byte)112,(byte)7};
 
-	public static final byte[] fbsub=
+	private static final byte[] fbsub=
 	{(byte)99,(byte)124,(byte)119,(byte)123,(byte)242,(byte)107,(byte)111,(byte)197,(byte)48,(byte)1,(byte)103,(byte)43,(byte)254,(byte)215,(byte)171,(byte)118,
 	(byte)202,(byte)130,(byte)201,(byte)125,(byte)250,(byte)89,(byte)71,(byte)240,(byte)173,(byte)212,(byte)162,(byte)175,(byte)156,(byte)164,(byte)114,(byte)192,
 	(byte)183,(byte)253,(byte)147,(byte)38,(byte)54,(byte)63,(byte)247,(byte)204,(byte)52,(byte)165,(byte)229,(byte)241,(byte)113,(byte)216,(byte)49,(byte)21,
@@ -101,7 +101,7 @@ public class AES {
 	(byte)225,(byte)248,(byte)152,(byte)17,(byte)105,(byte)217,(byte)142,(byte)148,(byte)155,(byte)30,(byte)135,(byte)233,(byte)206,(byte)85,(byte)40,(byte)223,
 	(byte)140,(byte)161,(byte)137,(byte)13,(byte)191,(byte)230,(byte)66,(byte)104,(byte)65,(byte)153,(byte)45,(byte)15,(byte)176,(byte)84,(byte)187,(byte)22};
 
-	public static final byte[] rbsub=
+	private static final byte[] rbsub=
 	{(byte)82,(byte)9,(byte)106,(byte)213,(byte)48,(byte)54,(byte)165,(byte)56,(byte)191,(byte)64,(byte)163,(byte)158,(byte)129,(byte)243,(byte)215,(byte)251,
 	(byte)124,(byte)227,(byte)57,(byte)130,(byte)155,(byte)47,(byte)255,(byte)135,(byte)52,(byte)142,(byte)67,(byte)68,(byte)196,(byte)222,(byte)233,(byte)203,
 	(byte)84,(byte)123,(byte)148,(byte)50,(byte)166,(byte)194,(byte)35,(byte)61,(byte)238,(byte)76,(byte)149,(byte)11,(byte)66,(byte)250,(byte)195,(byte)78,
@@ -119,10 +119,10 @@ public class AES {
 	(byte)160,(byte)224,(byte)59,(byte)77,(byte)174,(byte)42,(byte)245,(byte)176,(byte)200,(byte)235,(byte)187,(byte)60,(byte)131,(byte)83,(byte)153,(byte)97,
 	(byte)23,(byte)43,(byte)4,(byte)126,(byte)186,(byte)119,(byte)214,(byte)38,(byte)225,(byte)105,(byte)20,(byte)99,(byte)85,(byte)33,(byte)12,(byte)125};
 
-	public static final byte[] rco=
+	private static final byte[] rco=
 	{(byte)1,(byte)2,(byte)4,(byte)8,(byte)16,(byte)32,(byte)64,(byte)128,(byte)27,(byte)54,(byte)108,(byte)216,(byte)171,(byte)77,(byte)154,(byte)47};
 
-	public static final int[] ftable=
+	private static final int[] ftable=
 	{0xa56363c6,0x847c7cf8,0x997777ee,0x8d7b7bf6,0xdf2f2ff,0xbd6b6bd6,
 	0xb16f6fde,0x54c5c591,0x50303060,0x3010102,0xa96767ce,0x7d2b2b56,
 	0x19fefee7,0x62d7d7b5,0xe6abab4d,0x9a7676ec,0x45caca8f,0x9d82821f,
@@ -167,7 +167,7 @@ public class AES {
 	0xc6424284,0xb86868d0,0xc3414182,0xb0999929,0x772d2d5a,0x110f0f1e,
 	0xcbb0b07b,0xfc5454a8,0xd6bbbb6d,0x3a16162c};
 
-	public static final int[] rtable=
+	private static final int[] rtable=
 	{0x50a7f451,0x5365417e,0xc3a4171a,0x965e273a,0xcb6bab3b,0xf1459d1f,
 	0xab58faac,0x9303e34b,0x55fa3020,0xf66d76ad,0x9176cc88,0x254c02f5,
 	0xfcd7e54f,0xd7cb2ac5,0x80443526,0x8fa362b5,0x495ab1de,0x671bba25,
@@ -612,7 +612,7 @@ public class AES {
 		for (i=0;i<16;i++)
 			f[i]=0;
 	}
-/*
+
 	public static void main(String[] args) {
 		int i;
 
@@ -647,5 +647,5 @@ public class AES {
 
 		a.end();
 
-	} */
+	} 
 }

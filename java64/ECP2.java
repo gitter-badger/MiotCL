@@ -137,7 +137,7 @@ public final class ECP2 {
 		x.mul(z2); x.reduce();
 		y.mul(z2); 
 		y.mul(z);  y.reduce();
-		z=one;
+		z.copy(one);
 	}
 /* extract affine x as FP2 */
 	public FP2 getX()
@@ -235,12 +235,13 @@ public final class ECP2 {
 		FP2 y2=new FP2(y);
 		y2.sqr();
 		if (y2.equals(rhs)) INF=false;
-		else inf();
+		else {x.zero();INF=true;}
 	}
 
 /* construct this from x - but set to O if not on curve */
 	public ECP2(FP2 ix) {
 		x=new FP2(ix);
+		y=new FP2(1);
 		z=new FP2(1);
 		FP2 rhs=RHS(x);
 		if (rhs.sqrt()) 
@@ -248,7 +249,7 @@ public final class ECP2 {
 			y=new FP2(rhs);
 			INF=false;
 		}
-		else inf();
+		else {x.zero();INF=true;}
 	}
 
 /* this+=this */
@@ -473,8 +474,8 @@ public final class ECP2 {
 		}
 
 /* convert the table to affine */
-		if (ROM.CURVETYPE==ROM.WEIERSTRASS) 
-			multiaffine(8,W);
+
+		multiaffine(8,W);
 
 /* make exponent odd - add 2P if even, P if odd */
 		t.copy(e);

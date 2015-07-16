@@ -386,8 +386,8 @@ ECP2.prototype={
 		}
 
 // convert the table to affine 
-		if (ROM.CURVETYPE==ROM.WEIERSTRASS) 
-			ECP2.multiaffine(8,W);
+
+		ECP2.multiaffine(8,W);
 
 // make exponent odd - add 2P if even, P if odd 
 		t.copy(e);

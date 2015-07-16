@@ -23,7 +23,6 @@ a commercial license.
 /* test driver and function exerciser for RSA API Functions */
 
 public class TestRSA
-{
 
 	public static void main(String[] args) 
 	{
@@ -55,6 +54,7 @@ public class TestRSA
 		byte[] E=RSA.OAEP_ENCODE(M,rng,null); /* OAEP encode message M to E  */
 
 		RSA.ENCRYPT(pub,E,C);     /* encrypt encoded message */
+
 		System.out.print("Ciphertext= 0x"); RSA.printBinary(C);
 
 		System.out.print("Decrypting test string\n");

@@ -30,3 +30,6 @@ required. There are instructions provided for both Linux and Windows based syste
 
 <p>Instructions for the Windows build are in ./windows.md</p>
 
+
+
+[![Join the chat at https://gitter.im/CertiVox/MiotCL](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/CertiVox/MiotCL?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
